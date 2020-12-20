@@ -8,7 +8,6 @@ jobs:
     executor: python/default
     steps:
       - checkout
-      - python/install-deps
       - run:
           command: curl -X POST "https://api.testproject.io/v2/projects/08yckCJt10WcTeWNvRR9yQ/jobs/U2i09GKYIkmAHawPcP4ibA/run" >
             -H "accept:application/json" >
