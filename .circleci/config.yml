@@ -17,7 +17,7 @@ jobs:
           command: |
             cd recorded_example
             set -x
-            docker-compose up
+            docker-compose up --abort-on-container-exit
 
 workflows:
   main:
