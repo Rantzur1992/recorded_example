@@ -12,7 +12,7 @@ jobs:
             sudo apt-get install -y curl wget git
             git clone https://github.com/Rantzur1992/recorded_example.git
           
-     - run:
+      - run:
           name: Run tests
           command: |
             cd recorded_example
