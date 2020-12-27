@@ -1,22 +1,25 @@
 version: 2.1
-
-orbs:
-  python: circleci/python@0.2.1
-
 jobs:
-  build-env:
-    executor: python/default
-    steps:
-      - checkout
   run-recorded-tests:
-    executor: python/default
+    machine:
+      image: ubuntu-2004:202010-01
+    working_directory: testproject
     steps:
+      - run:
+          name: Update And Install Dependancies
+          command: |
+            sudo apt-get -y update
+            sudo apt-get install -y curl wget git
+            git clone https://github.com/Rantzur1992/recorded_example.git
+          
      - run:
-          command: curl -X POST "https://api.testproject.io/v2/projects/08yckCJt10WcTeWNvRR9yQ/jobs/U2i09GKYIkmAHawPcP4ibA/run"  -H "accept:application/json"  -H "Authorization:-Fjk1RhWN1jOk96paFjRZLj9Y8xw1Yvtl1KptDxas8U1" -H "Content-Type:application/json" -d "{}"
-          name: Run Test On Build
+          name: Run tests
+          command: |
+            cd recorded_example
+            set -x
+            docker-compose up -d
 
 workflows:
   main:
     jobs:
-      - build-env
       - run-recorded-tests
